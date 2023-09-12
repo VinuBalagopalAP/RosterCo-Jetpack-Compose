@@ -66,7 +66,10 @@ fun RollScreen(navController: NavController) {
         )
         Spacer(modifier = Modifier.height(40.dp))
         Card(
-            modifier = Modifier.size(450.dp),
+            modifier = Modifier
+                .size(450.dp)
+                .background(color = Color.White)
+            ,
             shape = RectangleShape,
         ){
             Image(

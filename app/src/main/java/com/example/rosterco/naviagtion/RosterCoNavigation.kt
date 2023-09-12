@@ -13,7 +13,7 @@ fun RosterCoNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = RosterCoRoutes.RollScreen.name){
+        startDestination = RosterCoRoutes.HomeScreen.name){
         composable(RosterCoRoutes.RollScreen.name){
             RollScreen(navController)
         }
