@@ -49,6 +49,10 @@ fun RollScreen(navController: NavController) {
         Font(R.font.indie_flower_regular)
     )
 
+    val metropolisFont = FontFamily(
+        Font(R.font.metropolis_bold)
+    )
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,7 +85,7 @@ fun RollScreen(navController: NavController) {
             text = "Welcome!",
             style = TextStyle(
                 fontSize = 25.sp,
-//                fontFamily = metropolis,
+                fontFamily = metropolisFont,
                 fontWeight = FontWeight(700),
                 color = Color(0xFF000000),
             )
