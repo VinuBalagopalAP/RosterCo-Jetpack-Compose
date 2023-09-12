@@ -1,6 +1,5 @@
 package com.example.rosterco.naviagtion
 
-
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -13,7 +12,7 @@ fun RosterCoNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
-        startDestination = RosterCoRoutes.HomeScreen.name){
+        startDestination = RosterCoRoutes.RollScreen.name){
         composable(RosterCoRoutes.RollScreen.name){
             RollScreen(navController)
         }
