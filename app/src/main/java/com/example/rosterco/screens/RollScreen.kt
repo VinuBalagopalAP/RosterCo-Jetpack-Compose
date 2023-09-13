@@ -53,7 +53,6 @@ fun RollScreen(navController: NavController) {
         Font(R.font.metropolis_bold)
     )
 
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth(),) {

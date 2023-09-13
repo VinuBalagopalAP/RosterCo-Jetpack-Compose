@@ -10,6 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Card
@@ -28,6 +31,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.rosterco.R
+import com.example.rosterco.model.TaskCardModel
+import com.example.rosterco.model.getTaskCardDetails
 
 
 @Composable
@@ -50,73 +55,79 @@ fun HomeTaskSection() {
                 .padding(10.dp)
         )
         Spacer(modifier = Modifier.height(8.dp))
-        HSCard()
+        HSCard(taskList = getTaskCardDetails())
     }
 }
 
 @Composable
-fun HSCard() {
+fun HSCard(taskList: List<TaskCardModel>) {
 
     val metropolisFont = FontFamily(
         Font(R.font.metropolis_bold)
     )
 
-    Card(
-        modifier = Modifier
-            .width(210.dp)
-            .padding(10.dp),
-        colors = CardDefaults.cardColors(Color(0xFFFEF7E9))
-    ) {
-        Column(
-            modifier = Modifier
-                .padding(10.dp)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.personal_icon),
-                contentDescription = "image description",
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier.size(40.dp),
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = "Personal",
-                style = TextStyle(
-                    fontSize = 20.sp,
-                    fontFamily = metropolisFont,
-                    fontWeight = FontWeight(700),
-                    color = Color(0xFF000000),
-                )
-            )
-            Spacer(modifier = Modifier.height(5.dp))
-
-            Row(
+    LazyVerticalGrid(
+        columns = GridCells.Fixed(2),
+        modifier = Modifier.padding(8.dp),
+    ){
+        items(taskList){ taskCardModel ->
+            Card(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(20.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+                    .width(210.dp)
+                    .padding(10.dp),
+                colors = CardDefaults.cardColors(taskCardModel.color)
             ) {
-                Card(
+                Column(
                     modifier = Modifier
-                        .width(63.dp)
-                        .height(32.dp),
-                    colors = CardDefaults.cardColors(Color.White)
-                ){
-                    Text(
-                        text = "3 Tasks",
-                        style = TextStyle(
-                            fontSize = 12.sp,
-                            fontFamily = metropolisFont),
-                        fontWeight = FontWeight(700),
-                        color = Color(0xFFF8C579),
+                        .padding(10.dp)
+                ) {
+                    Image(
+                        painter = painterResource(id = taskCardModel.icon),
+                        contentDescription = "image description",
+                        contentScale = ContentScale.FillWidth,
+                        modifier = Modifier.size(40.dp),
                     )
-                }
-                Icon(
-                    Icons.Filled.ArrowForward,
-                    "Back button",
-                    tint= Color(0xFFF8C579),
-                )
-            }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = taskCardModel.taskName,
+                        style = TextStyle(
+                            fontSize = 20.sp,
+                            fontFamily = metropolisFont,
+                            fontWeight = FontWeight(700),
+                            color = Color(0xFF000000),
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(5.dp))
 
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(20.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        Card(
+                            modifier = Modifier
+                                .width(63.dp)
+                                .height(32.dp),
+                            colors = CardDefaults.cardColors(Color.White)
+                        ){
+                            Text(
+                                text = "${taskCardModel.totalTaskNo} Tasks",
+                                style = TextStyle(
+                                    fontSize = 12.sp,
+                                    fontFamily = metropolisFont),
+                                fontWeight = FontWeight(700),
+                                color = taskCardModel.taskNoColor,
+                            )
+                        }
+                        Icon(
+                            Icons.Filled.ArrowForward,
+                            "Back button",
+                            tint= taskCardModel.arrowColor,
+                        )
+                    }
+                }
+            }
         }
     }
 }
